@@ -7,22 +7,25 @@ import java.util.List;
  * Использует принцип инъекции зависимостей через конструктор.
  */
 public class Cat {
-    private final Predator predator; // Зависимость от интерфейса Predator
+
+    Predator predator;
 
     /**
      * Конструктор с инъекцией зависимости.
-     * @param predator зависимость для получения информации о пище
+     * Принимает объект типа Feline, который реализует интерфейс Predator,
+     * и сохраняет его для использования в методах класса.
+     * @param feline зависимость для получения информации о пище кота
      */
-<span class="fc" id="L16">    public Cat(Predator predator) {</span>
-<span class="fc" id="L17">        this.predator = predator;</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L19">    public Cat(Feline feline) {</span>
+<span class="fc" id="L20">        this.predator = feline;</span>
+<span class="fc" id="L21">    }</span>
 
     /**
      * Возвращает звук, который издает кот.
      * @return строка &quot;Мяу&quot;
      */
     public String getSound() {
-<span class="fc" id="L25">        return &quot;Мяу&quot;;</span>
+<span class="fc" id="L28">        return &quot;Мяу&quot;;</span>
     }
 
     /**
@@ -31,7 +34,7 @@ public class Cat {
      * @throws Exception если возникает ошибка при получении пищи
      */
     public List&lt;String&gt; getFood() throws Exception {
-<span class="fc" id="L34">        return predator.eatMeat();</span>
+<span class="fc" id="L37">        return predator.eatMeat();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
