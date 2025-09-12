@@ -10,11 +10,11 @@ public class Alex extends Lion {
 
     /**
      * Конструктор, всегда передающий "Самец" в родительский класс.
-     * @param predator зависимость для получения информации о пище и котятах
+     * @param feline зависимость для получения информации о пище
      * @throws Exception если возникает ошибка при создании объекта
      */
-    public Alex(Predator predator) throws Exception {
-        super("Самец", predator);
+    public Alex(Feline feline) throws Exception {
+        super("Самец", feline);
     }
 
     /**

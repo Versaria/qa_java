@@ -3,7 +3,8 @@ package com.example;
 import java.util.List;
 
 /**
- * Класс кошачьих, наследуется от Animal и реализует интерфейс Predator.
+ * Класс, представляющий семейство кошачьих.
+ * Наследуется от класса Animal и реализует интерфейс Predator.
  * Содержит специфические методы для семейства кошачьих.
  */
 public class Feline extends Animal implements Predator {
@@ -32,7 +33,6 @@ public class Feline extends Animal implements Predator {
      * Возвращает количество котят по умолчанию.
      * @return количество котят (по умолчанию 1)
      */
-    @Override
     public int getKittens() {
         return getKittens(1);
     }
@@ -42,20 +42,8 @@ public class Feline extends Animal implements Predator {
      * @param kittensCount количество котят
      * @return переданное количество котят
      */
-    @Override
     public int getKittens(int kittensCount) {
         return kittensCount;
     }
 
-    /**
-     * Возвращает пищу в зависимости от типа животного.
-     * Использует метод родительского класса Animal.
-     * @param type тип животного
-     * @return список продуктов питания
-     * @throws Exception если передан неизвестный тип животного
-     */
-    @Override
-    public List<String> getFood(String type) throws Exception {
-        return super.getFood(type);
-    }
 }

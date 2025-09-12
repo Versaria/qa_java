@@ -10,11 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Параметризованные тесты для класса Lion.
  * Использует Mockito для создания мок-объектов.
+
+ * Изменения:
+ * 1. Мок Predator заменен на Feline
  */
 @ExtendWith(MockitoExtension.class)
 class LionParameterizedTest {
     @Mock
-    Predator predator; // Мок-объект интерфейса Predator
+    Feline feline; // Мок-объект класса Feline
 
     /**
      * Параметризованный тест допустимых значений пола.
@@ -23,7 +26,7 @@ class LionParameterizedTest {
     @ParameterizedTest
     @ValueSource(strings = {"Самец", "Самка"})
     void testValidSex(String sex) {
-        assertDoesNotThrow(() -> new Lion(sex, predator),
+        assertDoesNotThrow(() -> new Lion(sex, feline),
                 "Конструктор не должен выбрасывать исключение для допустимых значений пола");
     }
 
@@ -34,7 +37,7 @@ class LionParameterizedTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "Неизвестный", "Male", "Female"})
     void testInvalidSex(String sex) {
-        assertThrows(Exception.class, () -> new Lion(sex, predator),
+        assertThrows(Exception.class, () -> new Lion(sex, feline),
                 "Конструктор должен выбрасывать исключение для недопустимых значений пола");
     }
 }

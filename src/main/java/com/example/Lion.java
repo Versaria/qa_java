@@ -5,19 +5,26 @@ import java.util.List;
 /**
  * Класс, представляющий льва.
  * Использует принцип инъекции зависимостей через конструктор.
+ * Зависимость Feline передается через конструктор, что обеспечивает
+ * лучшую тестируемость и соблюдение принципа инверсии зависимостей.
+
+ * Изменения:
+ * 1. Убрано создание экземпляра Feline внутри класса
+ * 2. Добавлен конструктор с инъекцией зависимости Feline
+ * 3. Поля сделаны final для неизменяемости
  */
 public class Lion {
     private final boolean hasMane;
-    private final Predator predator; // Зависимость от интерфейса Predator
+    private final Feline feline; // Зависимость инжектируется через конструктор
 
     /**
-     * Конструктор с инъекцией зависимости.
+     * Конструктор с инъекцией зависимости Feline.
      * @param sex пол льва ("Самец" или "Самка")
-     * @param predator зависимость для получения информации о пище и котятах
+     * @param feline зависимость для получения информации о пище и котятах
      * @throws Exception если передан недопустимый пол
      */
-    public Lion(String sex, Predator predator) throws Exception {
-        this.predator = predator;
+    public Lion(String sex, Feline feline) throws Exception {
+        this.feline = feline;
         if ("Самец".equals(sex)) {
             hasMane = true;
         } else if ("Самка".equals(sex)) {
@@ -28,11 +35,11 @@ public class Lion {
     }
 
     /**
-     * Возвращает количество котят через зависимость Predator.
+     * Возвращает количество котят через зависимость Feline.
      * @return количество котят
      */
     public int getKittens() {
-        return predator.getKittens();
+        return feline.getKittens();
     }
 
     /**
@@ -44,11 +51,12 @@ public class Lion {
     }
 
     /**
-     * Возвращает пищу льва через зависимость Predator.
+     * Возвращает пищу льва через зависимость Feline.
+     * Лев является хищником, поэтому используется соответствующая категория.
      * @return список продуктов питания
      * @throws Exception если возникает ошибка при получении пищи
      */
     public List<String> getFood() throws Exception {
-        return predator.getFood("Хищник");
+        return feline.getFood("Хищник");
     }
 }

@@ -7,14 +7,17 @@ import java.util.List;
  * Использует принцип инъекции зависимостей через конструктор.
  */
 public class Cat {
-    private final Predator predator; // Зависимость от интерфейса Predator
+
+    Predator predator;
 
     /**
      * Конструктор с инъекцией зависимости.
-     * @param predator зависимость для получения информации о пище
+     * Принимает объект типа Feline, который реализует интерфейс Predator,
+     * и сохраняет его для использования в методах класса.
+     * @param feline зависимость для получения информации о пище кота
      */
-    public Cat(Predator predator) {
-        this.predator = predator;
+    public Cat(Feline feline) {
+        this.predator = feline;
     }
 
     /**
