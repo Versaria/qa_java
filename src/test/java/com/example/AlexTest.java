@@ -11,18 +11,15 @@ import static org.mockito.Mockito.*;
 /**
  * Тесты для класса Alex.
  * Использует Mockito для создания мок-объектов.
-
- * Изменения:
- * 1. Мок Predator заменен на Feline
+ * Каждый тест проверяет только одну функциональность.
  */
 @ExtendWith(MockitoExtension.class)
 class AlexTest {
     @Mock
-    Feline feline; // Мок-объект класса Feline
+    Feline feline;
 
     /**
-     * Тест метода getFriends.
-     * Проверяет только возврат корректного списка друзей.
+     * Тест возврата корректного списка друзей.
      */
     @Test
     void testGetFriends() throws Exception {
@@ -32,8 +29,7 @@ class AlexTest {
     }
 
     /**
-     * Тест метода getPlaceOfLiving.
-     * Проверяет только возврат корректного места жительства.
+     * Тест возврата корректного места жительства.
      */
     @Test
     void testGetPlaceOfLiving() throws Exception {
@@ -42,19 +38,26 @@ class AlexTest {
     }
 
     /**
-     * Тест переопределенного метода getKittens.
-     * Проверяет только возврат нуля котят.
+     * Тест возврата нуля котят.
      */
     @Test
-    void testGetKittens() throws Exception {
+    void testGetKittensReturnsZero() throws Exception {
         Alex alex = new Alex(feline);
         assertEquals(0, alex.getKittens());
+    }
+
+    /**
+     * Тест, что метод getKittens не вызывает соответствующий метод у Feline.
+     */
+    @Test
+    void testGetKittensNeverCallsFeline() throws Exception {
+        Alex alex = new Alex(feline);
+        alex.getKittens();
         verify(feline, never()).getKittens();
     }
 
     /**
      * Тест, что Алекс является самцом.
-     * Проверяет только наличие гривы у Алекса.
      */
     @Test
     void testAlexIsMale() throws Exception {
@@ -63,8 +66,7 @@ class AlexTest {
     }
 
     /**
-     * Тест конструктора Alex.
-     * Проверяет только успешное создание объекта.
+     * Тест успешного создания объекта.
      */
     @Test
     void testAlexConstructor() {

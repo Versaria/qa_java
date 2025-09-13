@@ -11,18 +11,15 @@ import static org.mockito.Mockito.*;
 /**
  * Тесты для класса Cat.
  * Использует Mockito для создания мок-объектов.
-
- * Изменения:
- * 1. Мок Predator заменен на Feline
+ * Каждый тест проверяет только одну функциональность.
  */
 @ExtendWith(MockitoExtension.class)
 class CatTest {
     @Mock
-    Feline feline; // Мок-объект класса Feline
+    Feline feline;
 
     /**
-     * Тест метода getSound.
-     * Проверяет только возврат корректного звука.
+     * Тест возврата корректного звука.
      */
     @Test
     void testGetSound() {
@@ -31,20 +28,27 @@ class CatTest {
     }
 
     /**
-     * Тест метода getFood с использованием мока.
-     * Проверяет только возврат корректного списка пищи.
+     * Тест возврата корректного списка пищи.
      */
     @Test
-    void testGetFood() throws Exception {
+    void testGetFoodReturnsCorrectValue() throws Exception {
         Cat cat = new Cat(feline);
         when(feline.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         assertEquals(List.of("Животные", "Птицы", "Рыба"), cat.getFood());
+    }
+
+    /**
+     * Тест вызова метода eatMeat у Feline.
+     */
+    @Test
+    void testGetFoodCallsEatMeat() throws Exception {
+        Cat cat = new Cat(feline);
+        cat.getFood();
         verify(feline, times(1)).eatMeat();
     }
 
     /**
-     * Тест конструктора Cat.
-     * Проверяет только успешное создание объекта.
+     * Тест успешного создания объекта.
      */
     @Test
     void testCatConstructor() {

@@ -10,9 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Параметризованные тесты для класса Lion.
  * Использует Mockito для создания мок-объектов.
-
- * Изменения:
- * 1. Мок Predator заменен на Feline
  */
 @ExtendWith(MockitoExtension.class)
 class LionParameterizedTest {

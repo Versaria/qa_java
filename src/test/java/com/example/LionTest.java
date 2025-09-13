@@ -11,20 +11,15 @@ import static org.mockito.Mockito.*;
 /**
  * Тесты для класса Lion.
  * Использует Mockito для создания мок-объектов.
- * Каждый тест проверяет только одну функциональность в соответствии с принципом "один тест - одна проверка".
-
- * Изменения:
- * 1. Разделен тест с двумя проверками на отдельные unit-тесты
- * 2. Все моки Predator заменены на Feline
+ * Каждый тест проверяет только одну функциональность.
  */
 @ExtendWith(MockitoExtension.class)
 class LionTest {
     @Mock
-    Feline feline; // Мок-объект класса Feline
+    Feline feline;
 
     /**
      * Тест наличия гривы у самца.
-     * Проверяет только наличие гривы у самца.
      */
     @Test
     void testDoesHaveManeForMale() throws Exception {
@@ -34,7 +29,6 @@ class LionTest {
 
     /**
      * Тест отсутствия гривы у самки.
-     * Проверяет только отсутствие гривы у самки.
      */
     @Test
     void testDoesHaveManeForFemale() throws Exception {
@@ -44,7 +38,6 @@ class LionTest {
 
     /**
      * Тест исключения при недопустимом поле.
-     * Проверяет только факт возникновения исключения.
      */
     @Test
     void testInvalidSexThrowsException() {
@@ -53,7 +46,6 @@ class LionTest {
 
     /**
      * Тест сообщения исключения при недопустимом поле.
-     * Проверяет только содержание сообщения исключения.
      */
     @Test
     void testInvalidSexExceptionMessage() {
@@ -64,26 +56,42 @@ class LionTest {
     }
 
     /**
-     * Тест метода getKittens.
-     * Проверяет только возврат корректного количества котят.
+     * Тест возврата корректного количества котят.
      */
     @Test
-    void testGetKittens() throws Exception {
+    void testGetKittensReturnsCorrectValue() throws Exception {
         Lion lion = new Lion("Самец", feline);
         when(feline.getKittens()).thenReturn(1);
         assertEquals(1, lion.getKittens());
+    }
+
+    /**
+     * Тест вызова метода getKittens у Feline.
+     */
+    @Test
+    void testGetKittensCallsFeline() throws Exception {
+        Lion lion = new Lion("Самец", feline);
+        lion.getKittens();
         verify(feline, times(1)).getKittens();
     }
 
     /**
-     * Тест метода getFood.
-     * Проверяет только возврат корректного списка пищи.
+     * Тест возврата корректного списка пищи.
      */
     @Test
-    void testGetFood() throws Exception {
+    void testGetFoodReturnsCorrectValue() throws Exception {
         Lion lion = new Lion("Самец", feline);
         when(feline.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
+    }
+
+    /**
+     * Тест вызова метода getFood у Feline.
+     */
+    @Test
+    void testGetFoodCallsFeline() throws Exception {
+        Lion lion = new Lion("Самец", feline);
+        lion.getFood();
         verify(feline, times(1)).getFood("Хищник");
     }
 }
