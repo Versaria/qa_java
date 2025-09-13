@@ -7,11 +7,6 @@ import java.util.List;
  * Использует принцип инъекции зависимостей через конструктор.
  * Зависимость Feline передается через конструктор, что обеспечивает
  * лучшую тестируемость и соблюдение принципа инверсии зависимостей.
-
- * Изменения:
- * 1. Убрано создание экземпляра Feline внутри класса
- * 2. Добавлен конструктор с инъекцией зависимости Feline
- * 3. Поля сделаны final для неизменяемости
  */
 public class Lion {
     private final boolean hasMane;
@@ -23,23 +18,23 @@ public class Lion {
      * @param feline зависимость для получения информации о пище и котятах
      * @throws Exception если передан недопустимый пол
      */
-<span class="fc" id="L26">    public Lion(String sex, Feline feline) throws Exception {</span>
-<span class="fc" id="L27">        this.feline = feline;</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (&quot;Самец&quot;.equals(sex)) {</span>
-<span class="fc" id="L29">            hasMane = true;</span>
-<span class="fc bfc" id="L30" title="All 2 branches covered.">        } else if (&quot;Самка&quot;.equals(sex)) {</span>
-<span class="fc" id="L31">            hasMane = false;</span>
+<span class="fc" id="L21">    public Lion(String sex, Feline feline) throws Exception {</span>
+<span class="fc" id="L22">        this.feline = feline;</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (&quot;Самец&quot;.equals(sex)) {</span>
+<span class="fc" id="L24">            hasMane = true;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        } else if (&quot;Самка&quot;.equals(sex)) {</span>
+<span class="fc" id="L26">            hasMane = false;</span>
         } else {
-<span class="fc" id="L33">            throw new Exception(&quot;Используйте допустимые значения пола животного - самец или самка&quot;);</span>
+<span class="fc" id="L28">            throw new Exception(&quot;Используйте допустимые значения пола животного - самец или самка&quot;);</span>
         }
-<span class="fc" id="L35">    }</span>
+<span class="fc" id="L30">    }</span>
 
     /**
      * Возвращает количество котят через зависимость Feline.
      * @return количество котят
      */
     public int getKittens() {
-<span class="fc" id="L42">        return feline.getKittens();</span>
+<span class="fc" id="L37">        return feline.getKittens();</span>
     }
 
     /**
@@ -47,7 +42,7 @@ public class Lion {
      * @return true если у льва есть грива (самец), false если нет (самка)
      */
     public boolean doesHaveMane() {
-<span class="fc" id="L50">        return hasMane;</span>
+<span class="fc" id="L45">        return hasMane;</span>
     }
 
     /**
@@ -57,7 +52,7 @@ public class Lion {
      * @throws Exception если возникает ошибка при получении пищи
      */
     public List&lt;String&gt; getFood() throws Exception {
-<span class="fc" id="L60">        return feline.getFood(&quot;Хищник&quot;);</span>
+<span class="fc" id="L55">        return feline.getFood(&quot;Хищник&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
